@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pd-k8s-api-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pd-k8s-api-b-label
+  template:
+    metadata:
+      labels:
+        app: pd-k8s-api-b-label
+    spec:
+      containers:
+      - name: pd-k8s-api-b-container
+        image: pdesaidocker/k8sapib
+        ports:
+        - containerPort: 8080 #port defined in image dockerfile

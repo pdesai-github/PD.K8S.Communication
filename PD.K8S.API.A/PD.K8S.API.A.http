@@ -1,0 +1,6 @@
+@PD.K8S.API.A_HostAddress = http://localhost:5199
+
+GET {{PD.K8S.API.A_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
