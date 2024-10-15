@@ -2,21 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pd-k8s-api-a
+  namespace: prod
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: pd-k8s-api-a-label
+      environment: prod
   template:
     metadata:
       labels:
         app: pd-k8s-api-a-label
+        environment: prod
     spec:
       containers:
       - name: pd-k8s-api-a-container
-        image: pdesaidocker/k8sapia:v2
+        image: pdesaidocker/k8sapia:v3
         ports:
         - containerPort: 8080 #port defined in image dockerfile
         env:  # Add environment variables here
         - name: apib-service-url
-          value: "http://pd-k8s-api-b-net-service:90/api/ApiB"  # Set the environment variable
+          value: "http://pd-k8s-api-b-net-service:91/api/ApiB"  # Set the environment variable
+        - name: api-message
+          value: "Hello from API A - prod"

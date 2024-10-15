@@ -21,11 +21,12 @@ namespace PD.K8S.API.A.Controllers
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(_configuration["apib-service-url"]);
+                var message = _configuration["api-message"];
 
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    return string.Concat("Api A: Hello World!", content);
+                    return string.Concat($" {message} : {content}");
                 }
                 else
                 {

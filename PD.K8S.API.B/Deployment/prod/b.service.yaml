@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pd-k8s-api-b-service
+  namespace: prod
+spec:
+  selector:
+    app: pd-k8s-api-b-label
+    environment: prod
+  ports:
+    - protocol: TCP
+      port: 80 #Other pods in the cluster can connect to this service on port 80
+      targetPort: 8080 #port defined in image dockerfile
+      nodePort: 30022 #port to be used to access via localhost
+  type: NodePort

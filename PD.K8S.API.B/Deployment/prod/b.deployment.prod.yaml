@@ -2,18 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pd-k8s-api-b
+  namespace: prod
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: pd-k8s-api-b-label
+      environment: prod
   template:
     metadata:
       labels:
         app: pd-k8s-api-b-label
+        environment: prod
     spec:
       containers:
       - name: pd-k8s-api-b-container
-        image: pdesaidocker/k8sapib
+        image: pdesaidocker/k8sapib:v1
         ports:
         - containerPort: 8080 #port defined in image dockerfile
+        env:
+        - name: api-message
+          value: "Hello from API B - Prod"      

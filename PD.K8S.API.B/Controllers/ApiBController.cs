@@ -8,11 +8,18 @@ namespace PD.K8S.API.B.Controllers
     [ApiController]
     public class ApiBController : ControllerBase
     {
+        IConfiguration _configuration;
+
+        public ApiBController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         // GET: api/<ApiBController>
         [HttpGet]
         public string Get()
         {
-            return "Api B: Hello World!";
+            var message = _configuration["api-message"];
+            return message;
         }
 
         // GET api/<ApiBController>/5
